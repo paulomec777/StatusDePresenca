@@ -22,7 +22,8 @@
         }
 
         h1 {
-            font-size: 48px; 
+            margin-top: -75px;
+            font-size: 60px; 
             font-weight: bold;
             color: green; 
             text-transform: uppercase;
@@ -39,6 +40,7 @@
             display: flex;
             gap: 20px;
         }
+
         .person {
             background: rgba(0, 0, 0, 0.7);
             padding: 20px;
@@ -99,14 +101,58 @@
             transform: scale(0.95);
         }
 
+        /* Sidebar de informações */
+        .sidebar {
+            position: fixed;
+            right: 200px; /* Mudei de 20px para 100px para mover mais à esquerda */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            font-size: 18px;
+            text-align: left;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .sidebar h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: center;
+            border-bottom: 2px solid white;
+            padding-bottom: 5px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
                 align-items: center;
             }
+
             .person {
                 width: 100%;
                 margin-bottom: 20px;
+            }
+
+            .sidebar {
+                position: static;
+                width: 90%;
+                margin: 20px auto;
+                transform: none;
             }
         }
     </style>
@@ -128,6 +174,17 @@
             <p class="status ausente" id="status2">Ausente</p>
             <button id="button2" class="button-absent" onclick="toggleStatus('status2', 'button2')">Alternar Presença</button>
         </div>
+    </div>
+
+    <!-- Sidebar de informações -->
+    <div class="sidebar">
+        <h2>Informações</h2>
+        <ul>
+            <li>📌 Reunião amanhã às 10h</li>
+            <li>⚠️ Nova diretriz de logística disponível</li>
+            <li>📢 Treinamento obrigatório na sexta-feira</li>
+            <li>📰 Última atualização do sistema: 12/02</li>
+        </ul>
     </div>
 
     <script>
