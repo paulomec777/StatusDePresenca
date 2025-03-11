@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chefia de Suprimento</title>
     <style>
+        :root {
+            --primary-color: green;
+            --secondary-color: red;
+            --font-large: 60px;
+            --font-medium: 30px;
+            --text-stroke: 2px black;
+            --background-opacity: rgba(0, 0, 0, 0.85); /* Fundo mais escuro */
+        }
+
         body {
             background-image: url('./imagens/Bandeira.jpg');
             background-size: cover;
@@ -23,17 +32,17 @@
 
         h1 {
             margin-top: -75px;
-            font-size: 60px; 
+            font-size: var(--font-large);
             font-weight: bold;
-            color: green; 
+            color: var(--primary-color);
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6); 
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
             padding: 20px;
             margin-bottom: 40px;
             display: inline-block;
-            -webkit-text-stroke: 2px black; 
-            text-stroke: 2px black;
+            -webkit-text-stroke: var(--text-stroke);
+            text-stroke: var(--text-stroke);
         }
 
         .container {
@@ -42,7 +51,7 @@
         }
 
         .person {
-            background: rgba(0, 0, 0, 0.7);
+            background: var(--background-opacity);
             padding: 20px;
             border-radius: 10px;
             text-align: center;
@@ -63,13 +72,13 @@
         }
 
         .ausente {
-            color: red;
+            color: var(--secondary-color);
             font-size: 35px;
             font-weight: bold;
         }
 
         .presente {
-            color: green;
+            color: var(--primary-color);
             font-size: 35px;
             font-weight: bold;
         }
@@ -86,11 +95,11 @@
         }
 
         .button-absent {
-            background-color: red;
+            background-color: var(--secondary-color);
         }
 
         .button-present {
-            background-color: green;
+            background-color: var(--primary-color);
         }
 
         button:hover {
@@ -101,14 +110,13 @@
             transform: scale(0.95);
         }
 
-        /* Sidebar de informações */
         .sidebar {
             position: fixed;
-            right: 200px; /* Mudei de 20px para 100px para mover mais à esquerda */
-            top: 50%;
+            right: 100px;
+            top: 55%;
             transform: translateY(-50%);
             width: 300px;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9); /* Fundo mais escuro */
             padding: 20px;
             border-radius: 10px;
             color: white;
@@ -118,11 +126,17 @@
         }
 
         .sidebar h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            text-align: center;
-            border-bottom: 2px solid white;
-            padding-bottom: 5px;
+            font-size: var(--font-medium);
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 6px rgba(6, 236, 6, 0.6);
+            padding: 20px;
+            margin-top: -20px;
+            display: inline-block;
+            -webkit-text-stroke: var(--text-stroke);
+            text-stroke: var(--text-stroke);
         }
 
         .sidebar ul {
@@ -133,8 +147,44 @@
         .sidebar li {
             margin-bottom: 10px;
             padding: 8px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar input {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.8);
+            color: black;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .sidebar input:focus {
+            background: rgba(255, 255, 255, 1);
+            outline: none;
+        }
+
+        .sidebar input[readonly] {
+            background: transparent;
+            color: white;
+            cursor: default;
+        }
+
+        .edit-button, .save-button {
+            margin-top: 10px;
+            background-color: var(--primary-color);
+            width: 100%;
+        }
+
+        .save-button {
+            background-color: #28a745; /* Verde para o botão Salvar */
+            display: none;
         }
 
         @media (max-width: 768px) {
@@ -161,52 +211,83 @@
     <h1>Chefia de Suprimento</h1>
     <div class="container">
         <div class="person" id="person1">
-            <img src="./Img/Caldeira.JPG" alt="Pessoa 1">
+            <img src="./Img/Caldeira.JPG" alt="Chefe Gen Caldeira">
             <h2>Chefe</h2>
             <h2>Gen Caldeira</h2>
             <p class="status ausente" id="status1">Ausente</p>
-            <button id="button1" class="button-absent" onclick="toggleStatus('status1', 'button1')">Alternar Presença</button>
+            <button id="button1" class="button-absent" onclick="toggleStatus('status1', 'button1')" aria-label="Alternar presença do Chefe Gen Caldeira">Alternar Presença</button>
         </div>
         <div class="person" id="person2">
-            <img src="./Img/CelCesar.JPG" alt="Pessoa 2">
+            <img src="./Img/CelCesar.JPG" alt="Sub Chefe Cel César">
             <h2>Sub Chefe</h2>
             <h2>Cel César</h2>
             <p class="status ausente" id="status2">Ausente</p>
-            <button id="button2" class="button-absent" onclick="toggleStatus('status2', 'button2')">Alternar Presença</button>
+            <button id="button2" class="button-absent" onclick="toggleStatus('status2', 'button2')" aria-label="Alternar presença do Sub Chefe Cel César">Alternar Presença</button>
         </div>
     </div>
 
     <!-- Sidebar de informações -->
     <div class="sidebar">
         <h2>Informações</h2>
-        <ul>
-            <li>📌 Reunião amanhã às 10h</li>
-            <li>⚠️ Nova diretriz de logística disponível</li>
-            <li>📢 Treinamento obrigatório na sexta-feira</li>
-            <li>📰 Última atualização do sistema: 12/02</li>
+        <ul id="info-list">
+            <!-- Itens serão carregados dinamicamente -->
         </ul>
+        <button class="edit-button" onclick="enableEdit()">Editar</button>
+        <button class="save-button" onclick="saveChanges()">Salvar</button>
     </div>
 
     <script>
+        // Função para alternar status de presença
         function toggleStatus(statusId, buttonId) {
-            let statusElement = document.getElementById(statusId);
-            let buttonElement = document.getElementById(buttonId);
-            
-            if (statusElement.textContent === 'Ausente') {
-                statusElement.textContent = 'Presente';
-                statusElement.classList.remove('ausente');
-                statusElement.classList.add('presente');
-                buttonElement.classList.remove('button-absent');
-                buttonElement.classList.add('button-present');
-            } else {
-                statusElement.textContent = 'Ausente';
-                statusElement.classList.remove('presente');
-                statusElement.classList.add('ausente');
-                buttonElement.classList.remove('button-present');
-                buttonElement.classList.add('button-absent');
-            }
+            const statusElement = document.getElementById(statusId);
+            const buttonElement = document.getElementById(buttonId);
+            const isAbsent = statusElement.textContent === 'Ausente';
+
+            statusElement.textContent = isAbsent ? 'Presente' : 'Ausente';
+            statusElement.classList.toggle('ausente', !isAbsent);
+            statusElement.classList.toggle('presente', isAbsent);
+            buttonElement.classList.toggle('button-absent', !isAbsent);
+            buttonElement.classList.toggle('button-present', isAbsent);
         }
 
+        // Função para carregar informações da sidebar
+        function loadInfo() {
+            const infoList = document.getElementById('info-list');
+            const savedInfo = JSON.parse(localStorage.getItem('sidebarInfo')) || [
+                "⚠️ Formatura no Contigente todas as QUINTAS-FEIRAS 09:15",
+                "🎉 Aniversariante do mês: Cb Tomaz",
+                "📢 Treinamento obrigatório na sexta-feira",
+                "📅 Reunião de planejamento: Segunda-feira, 10:00",
+                "🔧 Manutenção de equipamentos: Quarta-feira, 14:00"
+            ];
+
+            infoList.innerHTML = savedInfo.map(item => `
+                <li><input type="text" value="${item}" readonly></li>
+            `).join('');
+        }
+
+        // Função para habilitar edição
+        function enableEdit() {
+            const inputs = document.querySelectorAll('#info-list input');
+            inputs.forEach(input => input.readOnly = false);
+            document.querySelector('.edit-button').style.display = 'none';
+            document.querySelector('.save-button').style.display = 'block';
+        }
+
+        // Função para salvar alterações
+        function saveChanges() {
+            const inputs = document.querySelectorAll('#info-list input');
+            const infoList = Array.from(inputs).map(input => input.value);
+            localStorage.setItem('sidebarInfo', JSON.stringify(infoList));
+            loadInfo(); // Recarrega as informações
+            document.querySelector('.edit-button').style.display = 'block';
+            document.querySelector('.save-button').style.display = 'none';
+        }
+
+        // Carrega as informações ao iniciar
+        loadInfo();
+
+        // Background dinâmico
         let backgrounds = [
             './imagens/Bandeira.jpg', 
             './imagens/cavalaria.jpg', 
@@ -229,7 +310,7 @@
             document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
         }
 
-        setInterval(changeBackground, 5000); 
+        setInterval(changeBackground, 5000);
     </script>
 </body>
 </html>
