@@ -8,10 +8,10 @@
         :root {
             --primary-color: green;
             --secondary-color: red;
-            --font-large: 60px;
+            --font-large: 70px;
             --font-medium: 30px;
             --text-stroke: 2px black;
-            --background-opacity: rgba(0, 0, 0, 0.85); /* Fundo mais escuro */
+            --background-opacity: rgba(0, 0, 0, 0.9);
         }
 
         body {
@@ -56,6 +56,7 @@
             border-radius: 10px;
             text-align: center;
             width: 250px;
+            position: relative; /* Para posicionar a divisa */
         }
 
         .person img {
@@ -116,7 +117,7 @@
             top: 55%;
             transform: translateY(-50%);
             width: 300px;
-            background: rgba(0, 0, 0, 0.9); /* Fundo mais escuro */
+            background: var(--background-opacity);
             padding: 20px;
             border-radius: 10px;
             color: white;
@@ -183,9 +184,21 @@
         }
 
         .save-button {
-            background-color: #28a745; /* Verde para o botão Salvar */
+            background-color: #28a745;
             display: none;
         }
+
+        /* Estilo para a divisa */
+        .divisa {
+    position: absolute;
+    top: 5px !important; /* Espaço do topo */
+    right: 10px !important; /* Espaço da direita */
+    width: 45px !important; /* Largura quadrada */
+    height: 100px !important; /* Altura quadrada */
+    object-fit: cover !important; /* Garante que a imagem preencha o espaço sem distorcer */
+    border-radius: 0 !important; /* Remove bordas arredondadas */
+    z-index: 1; /* Garante que a divisa fique acima de outros elementos */
+}
 
         @media (max-width: 768px) {
             .container {
@@ -211,6 +224,8 @@
     <h1>Chefia de Suprimento</h1>
     <div class="container">
         <div class="person" id="person1">
+            <!-- Divisa no canto superior direito -->
+            <img src="./Img/Divisa1.jpg" alt="Divisa" class="divisa">
             <img src="./Img/Caldeira.JPG" alt="Chefe Gen Caldeira">
             <h2>Chefe</h2>
             <h2>Gen Caldeira</h2>
@@ -218,8 +233,10 @@
             <button id="button1" class="button-absent" onclick="toggleStatus('status1', 'button1')" aria-label="Alternar presença do Chefe Gen Caldeira">Alternar Presença</button>
         </div>
         <div class="person" id="person2">
+            <!-- Divisa no canto superior direito -->
+            <img src="./Img/Divisa2.jpg" alt="Divisa" class="divisa">
             <img src="./Img/CelCesar.JPG" alt="Sub Chefe Cel César">
-            <h2>Sub Chefe</h2>
+            <h2>Subchefe</h2>
             <h2>Cel César</h2>
             <p class="status ausente" id="status2">Ausente</p>
             <button id="button2" class="button-absent" onclick="toggleStatus('status2', 'button2')" aria-label="Alternar presença do Sub Chefe Cel César">Alternar Presença</button>
@@ -302,6 +319,7 @@
             './imagens/dISPARO.jpg',
             './imagens/CursoCigs.jpg',
             './imagens/OPERACAO.jpg',
+            './imagens/Freepik.png',
         ];
         let index = 0;
 
@@ -310,7 +328,7 @@
             document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
         }
 
-        setInterval(changeBackground, 5000);
+        setInterval(changeBackground, 3000);
     </script>
 </body>
 </html>
