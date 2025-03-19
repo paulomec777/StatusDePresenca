@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -111,6 +112,7 @@
             transform: scale(0.95);
         }
 
+        /* Sidebar de informações (direita) */
         .sidebar {
             position: fixed;
             right: 100px;
@@ -177,7 +179,8 @@
             cursor: default;
         }
 
-        .edit-button, .save-button {
+        .edit-button,
+        .save-button {
             margin-top: 10px;
             background-color: var(--primary-color);
             width: 100%;
@@ -188,17 +191,108 @@
             display: none;
         }
 
+        /* Painel à esquerda para aniversariantes e feriados */
+        .left-panel {
+            position: fixed;
+            left: 100px;
+            top: 55%;
+            transform: translateY(-50%);
+            width: 300px;
+            background: var(--background-opacity);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            font-size: 18px;
+            text-align: left;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .left-panel h2 {
+            font-size: var(--font-medium);
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            text-shadow: 3px 3px 6px rgba(6, 236, 6, 0.6);
+            padding: 20px;
+            margin-top: -20px;
+            display: inline-block;
+            -webkit-text-stroke: var(--text-stroke);
+            text-stroke: var(--text-stroke);
+            text-align: center; /* Adicionado para centralizar o texto */
+        }
+
+        .left-panel ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .left-panel li {
+            margin-bottom: 10px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         /* Estilo para a divisa */
         .divisa {
-    position: absolute;
-    top: 5px !important; /* Espaço do topo */
-    right: 10px !important; /* Espaço da direita */
-    width: 45px !important; /* Largura quadrada */
-    height: 100px !important; /* Altura quadrada */
-    object-fit: cover !important; /* Garante que a imagem preencha o espaço sem distorcer */
-    border-radius: 0 !important; /* Remove bordas arredondadas */
-    z-index: 1; /* Garante que a divisa fique acima de outros elementos */
-}
+            position: absolute;
+            top: 5px !important; /* Espaço do topo */
+            right: 10px !important; /* Espaço da direita */
+            width: 45px !important; /* Largura quadrada */
+            height: 100px !important; /* Altura quadrada */
+            object-fit: cover !important; /* Garante que a imagem preencha o espaço sem distorcer */
+            border-radius: 0 !important; /* Remove bordas arredondadas */
+            z-index: 1; /* Garante que a divisa fique acima de outros elementos */
+        }
+
+        /* Novas regras CSS para as divs de Aniversariantes e Feriados */
+        .left-panel>div {
+            /* Aplica estilos diretamente aos filhos da .left-panel que são divs */
+            background: rgba(0, 0, 0, 0.9);
+            /* Fundo com opacidade */
+            border-radius: 10px;
+            /* Bordas arredondadas */
+            margin-bottom: 10px;
+            /* Espaço entre as divs */
+            padding: 10px;
+            /* Espaçamento interno */
+            text-align: left;
+            /* Alinhamento do texto à esquerda */
+        }
+
+        .left-panel h3 {
+            /* Estilo para os títulos (Aniversariantes e Feriados) */
+            color: var(--primary-color);
+            /* Cor do texto */
+            font-size: 1.2em;
+            /* Tamanho da fonte */
+            margin-top: 0;
+            /* Remove a margem superior padrão */
+        }
+
+        .left-panel ul {
+            /* Estilo para as listas */
+            list-style: none;
+            /* Remove os marcadores de lista */
+            padding: 0;
+            /* Remove o padding padrão */
+        }
+
+        .left-panel li {
+            /* Estilo para os itens da lista */
+            margin-bottom: 5px;
+            /* Espaçamento entre os itens */
+            padding: 5px;
+            /* Espaçamento interno */
+            background: rgba(255, 255, 255, 0.1);
+            /* Fundo suavemente transparente */
+            border-radius: 5px;
+            /* Bordas arredondadas */
+        }
 
         @media (max-width: 768px) {
             .container {
@@ -211,7 +305,8 @@
                 margin-bottom: 20px;
             }
 
-            .sidebar {
+            .sidebar,
+            .left-panel {
                 position: static;
                 width: 90%;
                 margin: 20px auto;
@@ -220,6 +315,7 @@
         }
     </style>
 </head>
+
 <body>
     <h1>Chefia de Suprimento</h1>
     <div class="container">
@@ -230,7 +326,9 @@
             <h2>Chefe</h2>
             <h2>Gen Caldeira</h2>
             <p class="status ausente" id="status1">Ausente</p>
-            <button id="button1" class="button-absent" onclick="toggleStatus('status1', 'button1')" aria-label="Alternar presença do Chefe Gen Caldeira">Alternar Presença</button>
+            <button id="button1" class="button-absent"
+                onclick="toggleStatus('status1', 'button1')" aria-label="Alternar presença do Chefe Gen Caldeira">Alternar
+                Presença</button>
         </div>
         <div class="person" id="person2">
             <!-- Divisa no canto superior direito -->
@@ -239,11 +337,13 @@
             <h2>Subchefe</h2>
             <h2>Cel César</h2>
             <p class="status ausente" id="status2">Ausente</p>
-            <button id="button2" class="button-absent" onclick="toggleStatus('status2', 'button2')" aria-label="Alternar presença do Sub Chefe Cel César">Alternar Presença</button>
+            <button id="button2" class="button-absent"
+                onclick="toggleStatus('status2', 'button2')" aria-label="Alternar presença do Sub Chefe Cel César">Alternar
+                Presença</button>
         </div>
     </div>
 
-    <!-- Sidebar de informações -->
+    <!-- Sidebar de informações (direita) -->
     <div class="sidebar">
         <h2>Informações</h2>
         <ul id="info-list">
@@ -251,6 +351,25 @@
         </ul>
         <button class="edit-button" onclick="enableEdit()">Editar</button>
         <button class="save-button" onclick="saveChanges()">Salvar</button>
+    </div>
+
+    <!-- Painel à esquerda para aniversariantes e feriados -->
+    <div class="left-panel">
+        <h2>Aniversariantes e Feriados</h2>
+
+        <div id="aniversariantes">
+            <h3>Aniversariantes do mês</h3>
+            <ul id="aniversariantes-list">
+                <!-- Lista de aniversariantes será inserida aqui -->
+            </ul>
+        </div>
+
+        <div id="feriados">
+            <h3>Feriados</h3>
+            <ul id="feriados-list">
+                <!-- Lista de feriados será inserida aqui -->
+            </ul>
+        </div>
     </div>
 
     <script>
@@ -306,12 +425,12 @@
 
         // Background dinâmico
         let backgrounds = [
-            './imagens/Bandeira.jpg', 
-            './imagens/cavalaria.jpg', 
-            './imagens/intendencia.jpg', 
-            './imagens/Soldados.jpg', 
-            './imagens/GuerraNaSelva.jpg', 
-            './imagens/EBBR.jpg', 
+            './imagens/Bandeira.jpg',
+            './imagens/cavalaria.jpg',
+            './imagens/intendencia.jpg',
+            './imagens/Soldados.jpg',
+            './imagens/GuerraNaSelva.jpg',
+            './imagens/EBBR.jpg',
             './imagens/AMAN.jpg',
             './imagens/VETERINARIA.jpg',
             './imagens/FEB.jpg',
@@ -329,6 +448,85 @@
         }
 
         setInterval(changeBackground, 3000);
+
+        // Dados de aniversariantes e feriados
+        const aniversariantes = [
+            { nome: "Cb Gonçalves - Apoio", data: "03-19" }, // Formato MM-DD
+            { nome: "Cb Tomaz", data: "03-19" },
+            // Adicione mais aniversariantes aqui
+        ];
+
+        const feriados = [
+            { nome: "Independência do Brasil", data: "09-07" }, // Formato MM-DD
+            { nome: "Nossa Senhora Aparecida", data: "10-12" },
+            { nome: "Finados", data: "11-02" },
+            { nome: "Proclamação da República", data: "11-15" },
+            { nome: "Natal", data: "12-25" },
+            { nome: "Ano Novo", data: "01-01" }
+        ];
+
+        // Funções para verificar datas
+        function isAniversarianteDoMes(data) {
+            const hoje = new Date();
+            const mesAtual = hoje.getMonth() + 1; // Janeiro é 0
+            const mesAniversario = parseInt(data.split('-')[0]);
+            return mesAniversario === mesAtual;
+        }
+
+        function isFeriadoDoMes(data) {
+            const hoje = new Date();
+            const mesAtual = hoje.getMonth() + 1; // Janeiro é 0
+            const mesFeriado = parseInt(data.split('-')[0]);
+            return mesFeriado === mesAtual;
+        }
+
+        function formatDate(data) {
+            const partes = data.split('-');
+            return `${partes[1]}/${partes[0]}`; // Formato DD/MM
+        }
+
+        function atualizarPainel() {
+            const aniversariantesList = document.getElementById("aniversariantes-list");
+            const feriadosList = document.getElementById("feriados-list");
+
+            aniversariantesList.innerHTML = ""; // Limpa a lista de aniversariantes
+            feriadosList.innerHTML = ""; // Limpa a lista de feriados
+
+            // Aniversariantes do mês
+            aniversariantes.forEach(aniversariante => {
+                if (isAniversarianteDoMes(aniversariante.data)) {
+                    const li = document.createElement("li");
+                    li.textContent = `🎉 ${aniversariante.nome}`;
+                    aniversariantesList.appendChild(li);
+                }
+            });
+
+            // Feriados do mês
+            feriados.forEach(feriado => {
+                if (isFeriadoDoMes(feriado.data)) {
+                    const li = document.createElement("li");
+                    li.textContent = `📅 ${formatDate(feriado.data)} - ${feriado.nome}`;
+                    feriadosList.appendChild(li);
+                }
+            });
+
+            // Mensagens caso não haja eventos
+            if (aniversariantesList.children.length === 0) {
+                const li = document.createElement("li");
+                li.textContent = "Nenhum aniversariante neste mês.";
+                aniversariantesList.appendChild(li);
+            }
+
+            if (feriadosList.children.length === 0) {
+                const li = document.createElement("li");
+                li.textContent = "Nenhum feriado neste mês.";
+                feriadosList.appendChild(li);
+            }
+        }
+
+        // Atualiza o painel quando a página carrega
+        window.onload = atualizarPainel;
     </script>
 </body>
+
 </html>
