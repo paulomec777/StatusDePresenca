@@ -358,14 +358,14 @@
         <h2>Aniversariantes e Feriados</h2>
 
         <div id="aniversariantes">
-            <h3>Aniversariantes do mês</h3>
+            <h3>Aniversariantes do dia</h3>
             <ul id="aniversariantes-list">
                 <!-- Lista de aniversariantes será inserida aqui -->
             </ul>
         </div>
 
         <div id="feriados">
-            <h3>Feriados</h3>
+            <h3>Feriados do mês</h3>
             <ul id="feriados-list">
                 <!-- Lista de feriados será inserida aqui -->
             </ul>
@@ -390,11 +390,11 @@
         function loadInfo() {
             const infoList = document.getElementById('info-list');
             const savedInfo = JSON.parse(localStorage.getItem('sidebarInfo')) || [
-                "⚠️ Formatura no Contigente todas as QUINTAS-FEIRAS 09:15",
-                "🎉 Aniversariante do mês: Cb Tomaz",
-                "📢 Treinamento obrigatório na sexta-feira",
-                "📅 Reunião de planejamento: Segunda-feira, 10:00",
-                "🔧 Manutenção de equipamentos: Quarta-feira, 14:00"
+                "⚠️",
+                "⚠️",
+                "⚠️",
+                "⚠️",
+                "⚠️"
             ];
 
             infoList.innerHTML = savedInfo.map(item => `
@@ -426,19 +426,26 @@
         // Background dinâmico
         let backgrounds = [
             './imagens/Bandeira.jpg',
-            './imagens/cavalaria.jpg',
+            
+            './imagens/Paisagem1.jpg',
+            './imagens/Artilharia1.jpg',
             './imagens/intendencia.jpg',
+            './imagens/Aviacao.jpg',
+            './imagens/Avia.jpg',
+            './imagens/PQD.jpg',
+            './imagens/BALA.jpg',
+            './imagens/Guerra.jpg',
+            './imagens/aviacaoo.jpg',
+            './imagens/Paisagem2.jpg',
             './imagens/Soldados.jpg',
-            './imagens/GuerraNaSelva.jpg',
+            './imagens/Remonta.jpg',
             './imagens/EBBR.jpg',
             './imagens/AMAN.jpg',
             './imagens/VETERINARIA.jpg',
             './imagens/FEB.jpg',
             './imagens/ESA.jpg',
-            './imagens/dISPARO.jpg',
             './imagens/CursoCigs.jpg',
             './imagens/OPERACAO.jpg',
-            './imagens/Freepik.png',
         ];
         let index = 0;
 
