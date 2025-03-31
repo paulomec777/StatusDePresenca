@@ -57,7 +57,7 @@
             border-radius: 10px;
             text-align: center;
             width: 250px;
-            position: relative; /* Para posicionar a divisa */
+            position: relative;
         }
 
         .person img {
@@ -71,48 +71,65 @@
         .status {
             font-size: 30px;
             margin: 10px 0;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .ausente {
             color: var(--secondary-color);
-            font-size: 35px;
+            font-size: 25px;
             font-weight: bold;
         }
 
         .presente {
             color: var(--primary-color);
-            font-size: 35px;
+            font-size: 25px;
+            font-weight: bold;
+        }
+        
+        .viagem {
+            color: orange;
+            font-size: 25px;
+            font-weight: bold;
+        }
+        
+        .Almoço {
+            color: #309c1a;
+            font-size: 25px;
+            font-weight: bold;
+        }
+        
+        .ferias {
+            color: #FFD700;
+            font-size: 25px;
+            font-weight: bold;
+        }
+        
+        .Reunião {
+            color: #dbf305;
+            font-size: 25px;
             font-weight: bold;
         }
 
-        button {
-            padding: 15px 30px;
-            border: none;
+        .status-selector {
+            width: 100%;
+            padding: 10px;
             border-radius: 5px;
+            border: none;
+            font-size: 20px;
+            background-color: #333;
             color: white;
-            font-size: 16px;
-            font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 10px;
         }
 
-        .button-absent {
-            background-color: var(--secondary-color);
+        .status-selector:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
         }
 
-        .button-present {
-            background-color: var(--primary-color);
-        }
-
-        button:hover {
-            transform: scale(1.1);
-        }
-
-        button:active {
-            transform: scale(0.95);
-        }
-
-        /* Sidebar de informações (direita) */
         .sidebar {
             position: fixed;
             right: 100px;
@@ -191,7 +208,6 @@
             display: none;
         }
 
-        /* Painel à esquerda para aniversariantes e feriados */
         .left-panel {
             position: fixed;
             left: 100px;
@@ -219,7 +235,7 @@
             display: inline-block;
             -webkit-text-stroke: var(--text-stroke);
             text-stroke: var(--text-stroke);
-            text-align: center; /* Adicionado para centralizar o texto */
+            text-align: center;
         }
 
         .left-panel ul {
@@ -237,61 +253,41 @@
             gap: 10px;
         }
 
-        /* Estilo para a divisa */
         .divisa {
             position: absolute;
-            top: 5px !important; /* Espaço do topo */
-            right: 10px !important; /* Espaço da direita */
-            width: 45px !important; /* Largura quadrada */
-            height: 100px !important; /* Altura quadrada */
-            object-fit: cover !important; /* Garante que a imagem preencha o espaço sem distorcer */
-            border-radius: 0 !important; /* Remove bordas arredondadas */
-            z-index: 1; /* Garante que a divisa fique acima de outros elementos */
+            top: 5px !important;
+            right: 10px !important;
+            width: 45px !important;
+            height: 100px !important;
+            object-fit: cover !important;
+            border-radius: 0 !important;
+            z-index: 1;
         }
 
-        /* Novas regras CSS para as divs de Aniversariantes e Feriados */
         .left-panel>div {
-            /* Aplica estilos diretamente aos filhos da .left-panel que são divs */
             background: rgba(0, 0, 0, 0.9);
-            /* Fundo com opacidade */
             border-radius: 10px;
-            /* Bordas arredondadas */
             margin-bottom: 10px;
-            /* Espaço entre as divs */
             padding: 10px;
-            /* Espaçamento interno */
             text-align: left;
-            /* Alinhamento do texto à esquerda */
         }
 
         .left-panel h3 {
-            /* Estilo para os títulos (Aniversariantes e Feriados) */
             color: var(--primary-color);
-            /* Cor do texto */
             font-size: 1.2em;
-            /* Tamanho da fonte */
             margin-top: 0;
-            /* Remove a margem superior padrão */
         }
 
         .left-panel ul {
-            /* Estilo para as listas */
             list-style: none;
-            /* Remove os marcadores de lista */
             padding: 0;
-            /* Remove o padding padrão */
         }
 
         .left-panel li {
-            /* Estilo para os itens da lista */
             margin-bottom: 5px;
-            /* Espaçamento entre os itens */
             padding: 5px;
-            /* Espaçamento interno */
             background: rgba(255, 255, 255, 0.1);
-            /* Fundo suavemente transparente */
             border-radius: 5px;
-            /* Bordas arredondadas */
         }
 
         @media (max-width: 768px) {
@@ -320,73 +316,102 @@
     <h1>Chefia de Suprimento</h1>
     <div class="container">
         <div class="person" id="person1">
-            <!-- Divisa no canto superior direito -->
             <img src="./Img/Divisa1.jpg" alt="Divisa" class="divisa">
             <img src="./Img/Caldeira.JPG" alt="Chefe Gen Caldeira">
             <h2>Chefe</h2>
             <h2>Gen Caldeira</h2>
-            <p class="status ausente" id="status1">Ausente</p>
-            <button id="button1" class="button-absent"
-                onclick="toggleStatus('status1', 'button1')" aria-label="Alternar presença do Chefe Gen Caldeira">Alternar
-                Presença</button>
+            <p class="status ausente" id="status1">Fora da Chefia</p>
+            <select class="status-selector" onchange="changeStatus('status1', this.value)" aria-label="Selecionar status do Chefe Gen Caldeira">
+                <option value="Fora da Chefia" selected>Fora da Chefia</option>
+                <option value="Presente">Presente</option>
+                <option value="Em viagem">Em viagem</option>
+                <option value="Almoço">Almoço</option>
+                <option value="Férias">Férias</option>
+                <option value="Reunião">Reunião</option>
+            </select>
         </div>
         <div class="person" id="person2">
-            <!-- Divisa no canto superior direito -->
             <img src="./Img/Divisa2.jpg" alt="Divisa" class="divisa">
             <img src="./Img/CelCesar.JPG" alt="Sub Chefe Cel César">
             <h2>Subchefe</h2>
             <h2>Cel César</h2>
-            <p class="status ausente" id="status2">Ausente</p>
-            <button id="button2" class="button-absent"
-                onclick="toggleStatus('status2', 'button2')" aria-label="Alternar presença do Sub Chefe Cel César">Alternar
-                Presença</button>
+            <p class="status ausente" id="status2">Fora da Chefia</p>
+            <select class="status-selector" onchange="changeStatus('status2', this.value)" aria-label="Selecionar status do Sub Chefe Cel César">
+                <option value="Fora da Chefia" selected>Fora da Chefia</option>
+                <option value="Presente">Presente</option>
+                <option value="Em viagem">Em viagem</option>
+                <option value="Almoço">Almoço</option>
+                <option value="Férias">Férias</option>
+                <option value="Reunião">Reunião</option>
+            </select>
         </div>
     </div>
 
-    <!-- Sidebar de informações (direita) -->
     <div class="sidebar">
         <h2>Informações</h2>
         <ul id="info-list">
-            <!-- Itens serão carregados dinamicamente -->
         </ul>
         <button class="edit-button" onclick="enableEdit()">Editar</button>
         <button class="save-button" onclick="saveChanges()">Salvar</button>
     </div>
 
-    <!-- Painel à esquerda para aniversariantes e feriados -->
     <div class="left-panel">
         <h2>Aniversariantes e Feriados</h2>
 
         <div id="aniversariantes">
             <h3>Aniversariantes do dia</h3>
             <ul id="aniversariantes-list">
-                <!-- Lista de aniversariantes será inserida aqui -->
             </ul>
         </div>
 
         <div id="feriados">
             <h3>Feriados do mês</h3>
             <ul id="feriados-list">
-                <!-- Lista de feriados será inserida aqui -->
             </ul>
         </div>
     </div>
 
     <script>
-        // Função para alternar status de presença
-        function toggleStatus(statusId, buttonId) {
+        function changeStatus(statusId, newStatus) {
             const statusElement = document.getElementById(statusId);
-            const buttonElement = document.getElementById(buttonId);
-            const isAbsent = statusElement.textContent === 'Ausente';
-
-            statusElement.textContent = isAbsent ? 'Presente' : 'Ausente';
-            statusElement.classList.toggle('ausente', !isAbsent);
-            statusElement.classList.toggle('presente', isAbsent);
-            buttonElement.classList.toggle('button-absent', !isAbsent);
-            buttonElement.classList.toggle('button-present', isAbsent);
+            
+            // Remove todas as classes de status
+            statusElement.classList.remove('ausente', 'presente', 'viagem', 'Almoço', 'ferias', 'Reunião');
+            
+            // Define o novo texto e classe com base no status selecionado
+            statusElement.textContent = newStatus;
+            
+            switch(newStatus) {
+                case 'Fora da Chefia':
+                    statusElement.classList.add('ausente');
+                    break;
+                case 'Presente':
+                    statusElement.classList.add('presente');
+                    break;
+                case 'Em viagem':
+                    statusElement.classList.add('viagem');
+                    break;
+                case 'Almoço':
+                    statusElement.classList.add('Almoço');
+                    break;
+                case 'Férias':
+                    statusElement.classList.add('ferias');
+                    break;
+                case 'Reunião':
+                    statusElement.classList.add('Reunião');
+                    break;
+            }
+            
+            // Atualiza o dropdown para refletir a seleção atual
+            const selector = statusElement.nextElementSibling;
+            for (let option of selector.options) {
+                if (option.value === newStatus) {
+                    option.selected = true;
+                    break;
+                }
+            }
         }
 
-        // Função para carregar informações da sidebar
         function loadInfo() {
             const infoList = document.getElementById('info-list');
             const savedInfo = JSON.parse(localStorage.getItem('sidebarInfo')) || [
@@ -402,7 +427,6 @@
             `).join('');
         }
 
-        // Função para habilitar edição
         function enableEdit() {
             const inputs = document.querySelectorAll('#info-list input');
             inputs.forEach(input => input.readOnly = false);
@@ -410,23 +434,19 @@
             document.querySelector('.save-button').style.display = 'block';
         }
 
-        // Função para salvar alterações
         function saveChanges() {
             const inputs = document.querySelectorAll('#info-list input');
             const infoList = Array.from(inputs).map(input => input.value);
             localStorage.setItem('sidebarInfo', JSON.stringify(infoList));
-            loadInfo(); // Recarrega as informações
+            loadInfo();
             document.querySelector('.edit-button').style.display = 'block';
             document.querySelector('.save-button').style.display = 'none';
         }
 
-        // Carrega as informações ao iniciar
         loadInfo();
 
-        // Background dinâmico
         let backgrounds = [
             './imagens/Bandeira.jpg',
-            
             './imagens/Paisagem1.jpg',
             './imagens/Artilharia1.jpg',
             './imagens/intendencia.jpg',
@@ -456,102 +476,99 @@
 
         setInterval(changeBackground, 900000);
 
-        // Dados de aniversariantes e feriados
         const aniversariantes = [
-        
-  { nome: "Gen Caldeira - 23/01", data: "01-23" },
-  { nome: "Cel César - 04/06", data: "06-04" },
-  { nome: "Cel Fábio Araujo - 17/11", data: "11-17" },
-  { nome: "Cel Josiel - 27/06", data: "06-27" },
-  { nome: "Cel Jones - 28/10", data: "10-28" },
-  { nome: "Cel Ernane - 27/12", data: "12-27" },
-  { nome: "Cel Genaro - 05/08", data: "08-05" },
-  { nome: "Cel Silva Moreira - 06/12", data: "12-06" },
-  { nome: "Cel Jean - 09/03", data: "03-09" },
-  { nome: "Ten Cel Brum - 25/09", data: "09-25" },
-  { nome: "Ten Cel Brito - 23/05", data: "05-23" },
-  { nome: "Ten Cel Quintella - 18/04", data: "04-18" },
-  { nome: "Ten Cel Souza Lima - 25/04", data: "04-25" },
-  { nome: "Ten Cel Isaac - 05/12", data: "12-05" },
-  { nome: "Maj Albano - 10/03", data: "03-10" },
-  { nome: "Maj Assis - 11/08", data: "08-11" },
-  { nome: "Maj Fernando Luz - 15/01", data: "01-15" },
-  { nome: "Maj Mauro - 01/05", data: "05-01" },
-  { nome: "Maj Jennifer - 01/12", data: "12-01" },
-  { nome: "Maj Silva - 03/02", data: "02-03" },
-  { nome: "Maj Santiago - 13/01", data: "01-13" },
-  { nome: "Maj Bonfadini - 29/10", data: "10-29" },
-  { nome: "Maj Thales - 18/02", data: "02-18" },
-  { nome: "Maj Pacanhã - 28/01", data: "01-28" },
-  { nome: "Maj Juliano - 21/10", data: "10-21" },
-  { nome: "Maj Fabiano - 25/06", data: "06-25" },
-  { nome: "Maj Agra - 21/05", data: "05-21" },
-  { nome: "Cap Jerusa - 10/01", data: "01-10" },
-  { nome: "Cap Silvanio - 31/03", data: "03-31" },
-  { nome: "Cap Maximo - 20/01", data: "01-20" },
-  { nome: "Cap Renata Guariento - 23/04", data: "04-23" },
-  { nome: "1º Ten Barcellos - 31/05", data: "05-31" },
-  { nome: "1º Ten Clementino - 22/06", data: "06-22" },
-  { nome: "1º Ten Henrique Couto - 24/02", data: "02-24" },
-  { nome: "1º Ten Ferreira - 21/10", data: "10-21" },
-  { nome: "2º Ten Luana Carvalho - 17/03", data: "03-17" },
-  { nome: "2º Ten Herica - 10/06", data: "06-10" },
-  { nome: "2º Ten Camila Paiva - 20/11", data: "11-20" },
-  { nome: "2º Ten Bruna - 05/11", data: "11-05" },
-  { nome: "2º Ten Ricardo Santos - 22/07", data: "07-22" },
-  { nome: "2º Ten Buntemeyer - 22/03", data: "03-22" },
-  { nome: "S Ten Albuquerque - 21/11", data: "11-21" },
-  { nome: "S Ten Gesualdo - 27/02", data: "02-27" },
-  { nome: "S Ten Cleidson - 01/04", data: "04-01" },
-  { nome: "S Ten André Luiz - 21/09", data: "09-21" },
-  { nome: "S Ten Martins - 21/09", data: "09-21" },
-  { nome: "S Ten Ferrari - 18/03", data: "03-18" },
-  { nome: "S Ten Sandro Soares - 28/10", data: "10-28" },
-  { nome: "S Ten Camara - 18/02", data: "02-18" },
-  { nome: "S Ten Lauro - 13/06", data: "06-13" },
-  { nome: "S Ten Darlan - 11/03", data: "03-11" },
-  { nome: "S Ten Russo - 24/03", data: "03-24" },
-  { nome: "S Ten Dario - 22/04", data: "04-22" },
-  { nome: "S Ten M. Araujo - 30/11", data: "11-30" },
-  { nome: "S Ten Marcio Silva - 10/03", data: "03-10" },
-  { nome: "1º Sgt Cláudia - 13/11", data: "11-13" },
-  { nome: "1º Sgt Uchôa - 02/09", data: "09-02" },
-  { nome: "1º Sgt Campos - 01/02", data: "02-01" },
-  { nome: "1º Sgt Cesar Monteiro - 11/07", data: "07-11" },
-  { nome: "1º Sgt Vidotto - 30/06", data: "06-30" },
-  { nome: "2º Sgt Roniere - 24/01", data: "01-24" },
-  { nome: "3º Sgt Phelipe de Aquino - 26/10", data: "10-26" },
-  { nome: "3º Sgt Batista - 14/08", data: "08-14" },
-  { nome: "3º Sgt Paiva - 08/11", data: "11-08" },
-  { nome: "3º Sgt Pivetta - 14/06", data: "06-14" },
-  { nome: "3º Sgt Mauro - 03/02", data: "02-03" },
-  { nome: "3º Sgt Mota - 22/03", data: "03-22" },
-  { nome: "3º Sgt Costa - 11/03", data: "03-11" },
-  { nome: "3º Sgt Tainara - 22/06", data: "06-22" },
-  { nome: "Cb Abraão - 28/03", data: "03-28" },
-  { nome: "Cb Gonçalves - 27/09", data: "09-27" },
-  { nome: "Cb Felipe Soares - 29/06", data: "06-29" },
-  { nome: "Cb Ferreira - 30/11", data: "11-30" },
-  { nome: "Cb Martins - 25/03", data: "03-25" },
-  { nome: "Cb Dos Santos - 02/10", data: "10-02" },
-  { nome: "Cb Victor Lisboa - 01/09", data: "09-01" },
-  { nome: "Cb Paulo Oliveira - 23/09", data: "09-23" },
-  { nome: "Cb Gabriel - 20/09", data: "09-20" },
-  { nome: "Cb Walter - 27/08", data: "08-27" },
-  { nome: "Cb Nunes - 19/04", data: "04-19" },
-  { nome: "Cb Leandro - 31/03", data: "03-31" },
-  { nome: "Cb Tomaz - 04/05", data: "05-04" },
-  { nome: "Cb Garcia - 25/01", data: "01-25" },
-  { nome: "Sd Wesley Oliveira - 09/11", data: "11-09" },
-  { nome: "Sd Augusto - 18/04", data: "04-18" },
-  { nome: "Sd Alexandre - 08/07", data: "07-08" },
-  { nome: "Sd  Garrido - 13/02", data: "02-13" }
-];
+            { nome: "Gen Caldeira - 23/01", data: "01-23" },
+            { nome: "Cel César - 04/06", data: "06-04" },
+            { nome: "Cel Fábio Araujo - 17/11", data: "11-17" },
+            { nome: "Cel Josiel - 27/06", data: "06-27" },
+            { nome: "Cel Jones - 28/10", data: "10-28" },
+            { nome: "Cel Ernane - 27/12", data: "12-27" },
+            { nome: "Cel Genaro - 05/08", data: "08-05" },
+            { nome: "Cel Silva Moreira - 06/12", data: "12-06" },
+            { nome: "Cel Jean - 09/03", data: "03-09" },
+            { nome: "Ten Cel Brum - 25/09", data: "09-25" },
+            { nome: "Ten Cel Brito - 23/05", data: "05-23" },
+            { nome: "Ten Cel Quintella - 18/04", data: "04-18" },
+            { nome: "Ten Cel Souza Lima - 25/04", data: "04-25" },
+            { nome: "Ten Cel Isaac - 05/12", data: "12-05" },
+            { nome: "Maj Albano - 10/03", data: "03-10" },
+            { nome: "Maj Assis - 11/08", data: "08-11" },
+            { nome: "Maj Fernando Luz - 15/01", data: "01-15" },
+            { nome: "Maj Mauro - 01/05", data: "05-01" },
+            { nome: "Maj Jennifer - 01/12", data: "12-01" },
+            { nome: "Maj Silva - 03/02", data: "02-03" },
+            { nome: "Maj Santiago - 13/01", data: "01-13" },
+            { nome: "Maj Bonfadini - 29/10", data: "10-29" },
+            { nome: "Maj Thales - 18/02", data: "02-18" },
+            { nome: "Maj Pacanhã - 28/01", data: "01-28" },
+            { nome: "Maj Juliano - 21/10", data: "10-21" },
+            { nome: "Maj Fabiano - 25/06", data: "06-25" },
+            { nome: "Maj Agra - 21/05", data: "05-21" },
+            { nome: "Cap Jerusa - 10/01", data: "01-10" },
+            { nome: "Cap Silvanio - 31/03", data: "03-31" },
+            { nome: "Cap Maximo - 20/01", data: "01-20" },
+            { nome: "Cap Renata Guariento - 23/04", data: "04-23" },
+            { nome: "1º Ten Barcellos - 31/05", data: "05-31" },
+            { nome: "1º Ten Clementino - 22/06", data: "06-22" },
+            { nome: "1º Ten Henrique Couto - 24/02", data: "02-24" },
+            { nome: "1º Ten Ferreira - 21/10", data: "10-21" },
+            { nome: "2º Ten Luana Carvalho - 17/03", data: "03-17" },
+            { nome: "2º Ten Herica - 10/06", data: "06-10" },
+            { nome: "2º Ten Camila Paiva - 20/11", data: "11-20" },
+            { nome: "2º Ten Bruna - 05/11", data: "11-05" },
+            { nome: "2º Ten Ricardo Santos - 22/07", data: "07-22" },
+            { nome: "2º Ten Buntemeyer - 22/03", data: "03-22" },
+            { nome: "S Ten Albuquerque - 21/11", data: "11-21" },
+            { nome: "S Ten Gesualdo - 27/02", data: "02-27" },
+            { nome: "S Ten Cleidson - 01/04", data: "04-01" },
+            { nome: "S Ten André Luiz - 21/09", data: "09-21" },
+            { nome: "S Ten Martins - 21/09", data: "09-21" },
+            { nome: "S Ten Ferrari - 18/03", data: "03-18" },
+            { nome: "S Ten Sandro Soares - 28/10", data: "10-28" },
+            { nome: "S Ten Camara - 18/02", data: "02-18" },
+            { nome: "S Ten Lauro - 13/06", data: "06-13" },
+            { nome: "S Ten Darlan - 11/03", data: "03-11" },
+            { nome: "S Ten Russo - 24/03", data: "03-24" },
+            { nome: "S Ten Dario - 22/04", data: "04-22" },
+            { nome: "S Ten M. Araujo - 30/11", data: "11-30" },
+            { nome: "S Ten Marcio Silva - 10/03", data: "03-10" },
+            { nome: "1º Sgt Cláudia - 13/11", data: "11-13" },
+            { nome: "1º Sgt Uchôa - 02/09", data: "09-02" },
+            { nome: "1º Sgt Campos - 01/02", data: "02-01" },
+            { nome: "1º Sgt Cesar Monteiro - 11/07", data: "07-11" },
+            { nome: "1º Sgt Vidotto - 30/06", data: "06-30" },
+            { nome: "2º Sgt Roniere - 24/01", data: "01-24" },
+            { nome: "3º Sgt Phelipe de Aquino - 26/10", data: "10-26" },
+            { nome: "3º Sgt Batista - 14/08", data: "08-14" },
+            { nome: "3º Sgt Paiva - 08/11", data: "11-08" },
+            { nome: "3º Sgt Pivetta - 14/06", data: "06-14" },
+            { nome: "3º Sgt Mauro - 03/02", data: "02-03" },
+            { nome: "3º Sgt Mota - 22/03", data: "03-22" },
+            { nome: "3º Sgt Costa - 11/03", data: "03-11" },
+            { nome: "3º Sgt Tainara - 22/06", data: "06-22" },
+            { nome: "Cb Abraão - 28/03", data: "03-28" },
+            { nome: "Cb Gonçalves - 27/09", data: "09-27" },
+            { nome: "Cb Felipe Soares - 29/06", data: "06-29" },
+            { nome: "Cb Ferreira - 30/11", data: "11-30" },
+            { nome: "Cb Martins - 25/03", data: "03-25" },
+            { nome: "Cb Dos Santos - 02/10", data: "10-02" },
+            { nome: "Cb Victor Lisboa - 01/09", data: "09-01" },
+            { nome: "Cb Paulo Oliveira - 23/09", data: "09-23" },
+            { nome: "Cb Gabriel - 20/09", data: "09-20" },
+            { nome: "Cb Walter - 27/08", data: "08-27" },
+            { nome: "Cb Nunes - 19/04", data: "04-19" },
+            { nome: "Cb Leandro - 31/03", data: "03-31" },
+            { nome: "Cb Tomaz - 04/05", data: "05-04" },
+            { nome: "Cb Garcia - 25/01", data: "01-25" },
+            { nome: "Sd Wesley Oliveira - 09/11", data: "11-09" },
+            { nome: "Sd Augusto - 18/04", data: "04-18" },
+            { nome: "Sd Alexandre - 08/07", data: "07-08" },
+            { nome: "Sd Garrido - 13/02", data: "02-13" }
+        ];
 
         const feriados = [
             { nome: "Ano Novo", data: "01-01"},
             { nome: "Carnaval", data: "03-03"},
-            { nome: "Carnaval", data: "04-03"},
             { nome: "Dia do Exército", data: "04-16"},
             { nome: "Paixão de Cristo", data: "04-18"},
             { nome: "Páscoa", data: "04-20"},
@@ -563,92 +580,82 @@
             { nome: "Finados", data: "11-02" },
             { nome: "Proclamação da República", data: "11-15" },
             { nome: "Consciência Negra", data: "11-20" },
-            { nome: "Natal", data: "01-01"},
-
+            { nome: "Natal", data: "12-25"},
         ];
 
         function getWeekRange() {
-    const hoje = new Date();
-    const diaSemana = hoje.getDay(); // 0 (domingo) a 6 (sábado)
-    const inicioSemana = new Date(hoje);
-    inicioSemana.setDate(hoje.getDate() - (diaSemana === 0 ? 6 : diaSemana - 1)); // Segunda-feira
-    inicioSemana.setHours(0, 0, 0, 0); // Define o horário para 00:00:00
-    const fimSemana = new Date(inicioSemana);
-    fimSemana.setDate(inicioSemana.getDate() + 6); // Domingo
-    fimSemana.setHours(23, 59, 59, 999); // Define o horário para 23:59:59.999
+            const hoje = new Date();
+            const diaSemana = hoje.getDay();
+            const inicioSemana = new Date(hoje);
+            inicioSemana.setDate(hoje.getDate() - (diaSemana === 0 ? 6 : diaSemana - 1));
+            inicioSemana.setHours(0, 0, 0, 0);
+            const fimSemana = new Date(inicioSemana);
+            fimSemana.setDate(inicioSemana.getDate() + 6);
+            fimSemana.setHours(23, 59, 59, 999);
 
-    return { inicioSemana, fimSemana };
-}
-
-function isAniversarianteHoje(dataAniversario) {
-        const hoje = new Date();
-        const [mes, dia] = dataAniversario.split('-').map(Number);
-        
-        return hoje.getDate() === dia && (hoje.getMonth() + 1) === mes;
-    }
-
-    // Função para verificar se um feriado é deste mês
-    function isFeriadoDoMes(dataFeriado) {
-        const hoje = new Date();
-        const mesAtual = hoje.getMonth() + 1;
-        const mesFeriado = parseInt(dataFeriado.split('-')[0]);
-        return mesFeriado === mesAtual;
-    }
-
-    function formatDate(data) {
-        const [mes, dia] = data.split('-');
-        return `${dia}/${mes}`;
-    }
-
-    function atualizarPainel() {
-        const aniversariantesList = document.getElementById("aniversariantes-list");
-        const feriadosList = document.getElementById("feriados-list");
-
-        // Limpa as listas antes de atualizar
-        aniversariantesList.innerHTML = "";
-        feriadosList.innerHTML = "";
-
-        // Mudar o título para "Aniversariantes do dia"
-        document.querySelector('#aniversariantes h3').textContent = 'Aniversariantes do dia';
-
-        // Adiciona aniversariantes do dia
-        const aniversariantesDoDia = aniversariantes.filter(a => isAniversarianteHoje(a.data));
-        
-        if (aniversariantesDoDia.length > 0) {
-            aniversariantesDoDia.forEach(aniversariante => {
-                const li = document.createElement("li");
-                li.textContent = `🎉 ${aniversariante.nome}`;
-                aniversariantesList.appendChild(li);
-            });
-        } else {
-            const li = document.createElement("li");
-            li.textContent = "Nenhum aniversariante hoje.";
-            aniversariantesList.appendChild(li);
+            return { inicioSemana, fimSemana };
         }
 
-        // Adiciona feriados do mês
-        feriados.forEach(feriado => {
-            if (isFeriadoDoMes(feriado.data)) {
+        function isAniversarianteHoje(dataAniversario) {
+            const hoje = new Date();
+            const [mes, dia] = dataAniversario.split('-').map(Number);
+            return hoje.getDate() === dia && (hoje.getMonth() + 1) === mes;
+        }
+
+        function isFeriadoDoMes(dataFeriado) {
+            const hoje = new Date();
+            const mesAtual = hoje.getMonth() + 1;
+            const mesFeriado = parseInt(dataFeriado.split('-')[0]);
+            return mesFeriado === mesAtual;
+        }
+
+        function formatDate(data) {
+            const [mes, dia] = data.split('-');
+            return `${dia}/${mes}`;
+        }
+
+        function atualizarPainel() {
+            const aniversariantesList = document.getElementById("aniversariantes-list");
+            const feriadosList = document.getElementById("feriados-list");
+
+            aniversariantesList.innerHTML = "";
+            feriadosList.innerHTML = "";
+
+            document.querySelector('#aniversariantes h3').textContent = 'Aniversariantes do dia';
+
+            const aniversariantesDoDia = aniversariantes.filter(a => isAniversarianteHoje(a.data));
+            
+            if (aniversariantesDoDia.length > 0) {
+                aniversariantesDoDia.forEach(aniversariante => {
+                    const li = document.createElement("li");
+                    li.textContent = `🎉 ${aniversariante.nome}`;
+                    aniversariantesList.appendChild(li);
+                });
+            } else {
                 const li = document.createElement("li");
-                li.textContent = `📅 ${formatDate(feriado.data)} - ${feriado.nome}`;
+                li.textContent = "Nenhum aniversariante hoje.";
+                aniversariantesList.appendChild(li);
+            }
+
+            feriados.forEach(feriado => {
+                if (isFeriadoDoMes(feriado.data)) {
+                    const li = document.createElement("li");
+                    li.textContent = `📅 ${formatDate(feriado.data)} - ${feriado.nome}`;
+                    feriadosList.appendChild(li);
+                }
+            });
+
+            if (feriadosList.children.length === 0) {
+                const li = document.createElement("li");
+                li.textContent = "Nenhum feriado neste mês.";
                 feriadosList.appendChild(li);
             }
-        });
-
-        // Mensagem caso não haja feriados
-        if (feriadosList.children.length === 0) {
-            const li = document.createElement("li");
-            li.textContent = "Nenhum feriado neste mês.";
-            feriadosList.appendChild(li);
         }
-    }
 
-    // Atualiza o painel quando a página carrega
-    window.onload = function() {
-        loadInfo();
-        atualizarPainel();
-    };
-</script>
+        window.onload = function() {
+            loadInfo();
+            atualizarPainel();
+        };
+    </script>
 </body>
-
 </html>
