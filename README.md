@@ -4,6 +4,8 @@ Painel para exibir em uma TV ou monitor da seção, mostrando se a chefia está
 presente e trazendo avisos, aniversariantes do dia e feriados do mês. Feito
 para a Chefia de Suprimento.
 
+**Veja funcionando:** https://paulomec777.github.io/StatusDePresenca/
+
 ## Funcionalidades
 
 - **Status do chefe e do subchefe:** presente, fora da chefia, em viagem,
